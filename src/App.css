@@ -1,0 +1,97 @@
+/* ========================================= */
+/* VARIABLES GLOBALES ESTILO SPACEX          */
+/* ========================================= */
+:root {
+  --bg-deep: #000000;       /* Negro absoluto */
+  --box-bg: transparent;    /* Estructura limpia de líneas sin cajas grises */
+  --box-border: #2a2a2a;    /* Líneas finas estilo consolas de ingeniería */
+  --text-main: #ffffff;     /* Blanco puro */
+  --accent: #ffffff;
+  --text-muted: #888888;    /* Gris técnico */
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================= */
+/* ESTRUCTURA GENERAL Y CARGADORES           */
+/* ========================================= */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.main-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--box-border);
+  padding-bottom: 2rem;
+}
+
+.main-header h1 {
+  color: var(--text-main);
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 5rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* ========================================= */
+/* FOOTER PRINCIPAL                          */
+/* ========================================= */
+.main-footer {
+  text-align: center;
+  margin-top: 6rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--box-border);
+}
+
+.main-footer p {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  text-transform: none;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  letter-spacing: 1px;
+}
+
+.footer-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  color: var(--text-muted);
+}

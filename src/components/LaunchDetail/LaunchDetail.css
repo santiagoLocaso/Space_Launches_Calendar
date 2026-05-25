@@ -1,0 +1,431 @@
+/* ========================================= */
+/* CONTENEDOR DE DETALLE Y NAVEGACIÓN        */
+/* ========================================= */
+.cdm-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.cdm-back-nav {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.cdm-back-btn {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--box-border);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.cdm-back-btn:hover {
+  background-color: var(--text-main);
+  color: #000000;
+}
+
+/* ========================================= */
+/* HERO BANNER PRINCIPAL                     */
+/* ========================================= */
+.cdm-hero {
+  border-radius: 0;
+  overflow: hidden;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  border: 1px solid var(--box-border);
+}
+
+.cdm-badge {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.cdm-hero-content h1 {
+  color: var(--text-main);
+  font-size: 3rem;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+  letter-spacing: 2px;
+  line-height: 1.2; 
+}
+
+.cdm-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+}
+
+/* BLOCK BOXES */
+.cdm-box {
+  background-color: transparent;
+  border: 1px solid var(--box-border);
+  border-radius: 0;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cdm-box h3 {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--box-border);
+  padding-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* ========================================= */
+/* RELOJ EN BLOQUES (COUNTDOWN)              */
+/* ========================================= */
+.cdm-timer-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cdm-timer-sign {
+  color: var(--text-main);
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  margin-right: 1rem;
+}
+
+.cdm-time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid var(--box-border);
+  border-radius: 0;
+  padding: 1rem;
+  min-width: 80px;
+}
+
+.cdm-time-num {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3rem;
+  font-weight: normal;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.cdm-time-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  letter-spacing: 2px;
+}
+
+.cdm-timer-colon {
+  color: var(--box-border);
+  font-size: 3rem;
+  font-weight: normal;
+  padding-bottom: 1.5rem;
+}
+
+/* ========================================= */
+/* GRILLAS DE DATOS JUSTIFICADAS             */
+/* ========================================= */
+.cdm-grid-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+  gap: 0; 
+  margin-top: 2rem;
+}
+
+.cdm-data-item {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1.2rem 1.5rem; 
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid var(--box-border);
+  transition: all 0.3s ease;
+}
+
+.cdm-grid-data .cdm-data-item:first-child {
+  border-top: 1px solid var(--box-border);
+}
+
+.cdm-data-item:hover {
+  background-color: rgba(255, 255, 255, 0.02); 
+  border-left: 2px solid var(--text-main); 
+  padding-left: 1.3rem; 
+}
+
+.cdm-data-key {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text-muted); 
+  font-weight: 700; 
+  font-size: 0.8rem; 
+  text-transform: uppercase;
+  letter-spacing: 2px; 
+  flex-shrink: 0;
+}
+
+.cdm-data-value {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text-main); 
+  font-size: 0.95rem; 
+  font-weight: 400; 
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  text-align: right; 
+  max-width: 65%; 
+}
+
+.telemetry-font {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.cdm-description p {
+  color: var(--text-muted);
+  line-height: 1.8; 
+  font-size: 0.95rem;
+  margin: 0;
+  text-transform: none; 
+  letter-spacing: 0.5px;
+}
+
+/* ========================================= */
+/* CARGAS ÚTILES (PAYLOADS)                  */
+/* ========================================= */
+.payload-container {
+  background-color: transparent;
+  border: 1px solid var(--box-border);
+  padding: 1.5rem;
+  border-radius: 0;
+}
+
+.payload-title {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  border-left: 3px solid var(--text-main);
+  padding-left: 10px;
+}
+
+.payload-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.payload-list li {
+  color: var(--text-main);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.payload-list strong {
+  color: var(--text-muted);
+  display: inline-block;
+  width: 100px;
+}
+
+.payload-desc {
+  font-style: italic;
+  font-size: 0.85rem !important;
+  color: var(--text-muted) !important;
+  border-top: 1px dashed var(--box-border);
+  padding-top: 1rem;
+}
+
+/* ========================================= */
+/* SECUENCIA DE VUELO (TABLA)                */
+/* ========================================= */
+.spacex-table {
+  width: 100%;
+}
+
+.spacex-table-head {
+  display: flex;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--box-border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.col-time {
+  width: 250px;
+}
+
+.spacex-row {
+  display: flex;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--box-border);
+  align-items: center;
+}
+
+.spacex-time {
+  width: 250px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+.spacex-event {
+  flex: 1;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  line-height: 1.6; 
+}
+
+.spacex-row:last-child {
+  border-bottom: none;
+}
+
+.spacex-row:hover .spacex-event {
+  color: #fff;
+}
+
+/* ========================================= */
+/* BOTONES SOCIALES Y TRANSMISIONES          */
+/* ========================================= */
+.cdm-live-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid var(--text-main);
+  color: var(--text-main);
+  padding: 1.2rem;
+  border-radius: 0;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.cdm-live-btn:hover {
+  background-color: var(--text-main);
+  color: #000000;
+}
+
+.live-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  margin-right: 15px;
+  animation: pulse-red 1.5s infinite;
+}
+
+.share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.share-btn {
+  background-color: transparent;
+  border: 1px solid var(--box-border);
+  color: var(--text-main);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+}
+
+.share-btn:hover {
+  border-color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.copy-btn {
+  border-color: var(--text-main);
+  border-radius: 30px;
+}
+
+/* ========================================= */
+/* ANIMACIONES Y MEDIA QUERIES               */
+/* ========================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+@media (max-width: 768px) {
+  .cdm-timer-display {
+    flex-wrap: wrap;
+  }
+  .cdm-time-block {
+    min-width: 60px;
+    padding: 0.5rem;
+  }
+  .cdm-time-num {
+    font-size: 2rem;
+  }
+  .cdm-hero {
+    padding: 1.5rem;
+    height: auto;
+    min-height: 300px;
+  }
+  .cdm-hero-content h1 {
+    font-size: 2rem;
+  }
+  .spacex-table-head {
+    display: none;
+  }
+  .spacex-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.5rem;
+  }
+  .spacex-time {
+    width: auto;
+  }
+}
