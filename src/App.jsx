@@ -37,6 +37,29 @@ function App() {
     getLaunches();
   }, []);
 
+  useEffect(() => {
+    const handlePopState = () => {
+      // Leemos la URL actual después de que el usuario tocó "Atrás"
+      const params = new URLSearchParams(window.location.search);
+      const launchId = params.get('id');
+
+      if (launchId) {
+        // Si sigue habiendo un ID, buscamos y mostramos ese lanzamiento
+        const foundLaunch = launches.find(l => l.id === launchId);
+        setSelectedLaunch(foundLaunch || null);
+      } else {
+        // Si no hay ID (porque volvimos a la raíz), cerramos el detalle
+        setSelectedLaunch(null);
+      }
+    };
+
+    // Activamos el "escuchador" del navegador
+    window.addEventListener('popstate', handlePopState);
+
+    // Limpiamos el evento si el componente se desmonta
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [launches]);
+
   // Función para cambiar de pantalla y actualizar la URL al mismo tiempo
   const handleNavigation = (launch) => {
     setSelectedLaunch(launch);

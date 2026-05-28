@@ -8,6 +8,8 @@ export function LaunchDetail({ launch, onBack }) {
   const [translatedDesc, setTranslatedDesc] = useState('');
   const [isTranslating, setIsTranslating] = useState(true);
 
+  const [isCopied, setIsCopied] = useState(false);
+
   // MAGIA PURA: Reemplazamos 35 líneas de lógica por esta sola línea
   const timeParts = useCountdown(launch.net);
 
@@ -57,13 +59,39 @@ export function LaunchDetail({ launch, onBack }) {
   const handleCopyLink = () => {
     const publicUrl = `${window.location.origin}/?id=${launch.id}`;
     navigator.clipboard.writeText(publicUrl);
-    alert("Enlace copiado al portapapeles");
+    
+    setIsCopied(true);
+    
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
 
   const publicShareUrl = `${window.location.origin}/?id=${launch.id}`;
   
   const whatsappText = `🚀 ¡Mira este lanzamiento: *${launch.name}*!\n\nSigue la cuenta regresiva, la telemetría y los datos de la misión aquí:\n${publicShareUrl}`;
   const twitterText = `🚀 Sigue el lanzamiento de ${launch.name} en el calendario de misiones.\n\n`;
+
+// --- FUNCIÓN PARA AGENDAR EN GOOGLE CALENDAR ---
+  const handleAddToCalendar = () => {
+    const startDate = new Date(launch.net);
+    // Asumimos que el evento de lanzamiento dura 1 hora en la agenda
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+
+    // Google Calendar requiere este formato exacto: YYYYMMDDTHHmmssZ
+    const formatToGCalDate = (date) => date.toISOString().replace(/-|:|\.\d\d\d/g, "");
+
+    const title = encodeURIComponent(`🚀 Lanzamiento: ${launch.name}`);
+    const details = encodeURIComponent(`Sigue la cuenta regresiva, la telemetría y transmisión en vivo aquí:\n${window.location.origin}/?id=${launch.id}`);
+    const location = encodeURIComponent(launch.pad?.name || 'Centro Espacial');
+    const dates = `${formatToGCalDate(startDate)}/${formatToGCalDate(endDate)}`;
+
+    // URL dinámica que abre Google Calendar con todo pre-completado
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+    
+    window.open(gCalUrl, '_blank');
+  };
+
   return (
     <div className="cdm-container">
       <div className="cdm-back-nav">
@@ -237,10 +265,16 @@ export function LaunchDetail({ launch, onBack }) {
       </div>
 
       <div className="cdm-box">
-        <h3>COMPARTIR MISIÓN</h3>
+        <h3>RECORDATORIO Y COMPARTIR</h3>
         <div className="share-buttons">
+          
+          {/* BOTÓN DE ALARMA DESTACADO */}
+          <button onClick={handleAddToCalendar} className="share-btn copy-btn" style={{ borderColor: '#e5b13a', color: '#e5b13a' }}>
+            🔔 ACTIVAR ALARMA
+          </button>
+          
           <a 
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(window.location.href)}`} 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(publicShareUrl)}`} 
             target="_blank" 
             rel="noopener noreferrer" 
             className="share-btn"
@@ -249,7 +283,7 @@ export function LaunchDetail({ launch, onBack }) {
           </a>
           
           <a 
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(publicShareUrl)}`} 
             target="_blank" 
             rel="noopener noreferrer" 
             className="share-btn"
@@ -266,10 +300,19 @@ export function LaunchDetail({ launch, onBack }) {
             WHATSAPP
           </a>
           
-          <button onClick={handleCopyLink} className="share-btn copy-btn">🔗 COPIAR ENLACE</button>
+          <button 
+            onClick={handleCopyLink} 
+            className="share-btn copy-btn"
+            style={{ 
+              borderColor: isCopied ? '#4ade80' : 'var(--box-border)', 
+              color: isCopied ? '#4ade80' : 'var(--text-main)' 
+            }}
+          >
+            {isCopied ? '✅ COPIADO' : '🔗 COPIAR ENLACE'}
+          </button>
         </div>
       </div>
-            <footer className="main-footer">
+      <footer className="main-footer">
         <p>"Mira otra vez ese punto. Eso es aquí. Ese es nuestro hogar. Eso somos nosotros."</p>
         <div className="footer-links">
           <span>&copy; {new Date().getFullYear()} SANTIAGO LOCASO</span>
