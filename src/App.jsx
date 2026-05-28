@@ -1,9 +1,8 @@
-import axios from 'axios'
 import { useState, useEffect } from 'react';
 import './App.css';
-import { LaunchCard } from "./components/LaunchCard/LaunchCard.jsx";
-import { LaunchDetail } from "./components/LaunchDetail/LaunchDetail.jsx";
-import { fetchUpcomingLaunches } from './services/api'; // Importamos el servicio
+import { LaunchCard } from './components/LaunchCard/LaunchCard.jsx';
+import { LaunchDetail } from './components/LaunchDetail/LaunchDetail.jsx';
+import { fetchUpcomingLaunches } from './services/api';
 
 function App() {
   const [launches, setLaunches] = useState([]);
@@ -11,12 +10,24 @@ function App() {
   const [error, setError] = useState(null);
   const [selectedLaunch, setSelectedLaunch] = useState(null);
 
-  // El useEffect ahora está súper limpio
   useEffect(() => {
     const getLaunches = async () => {
       try {
-        const data = await fetchUpcomingLaunches(); // Usamos la función del servicio
+        const data = await fetchUpcomingLaunches();
         setLaunches(data);
+        
+        // MAGIA DE ENRUTAMIENTO: Leer la URL al cargar la app
+        const params = new URLSearchParams(window.location.search);
+        const launchId = params.get('id');
+        
+        if (launchId) {
+          // Si hay un ID en la URL, buscamos el cohete y lo abrimos
+          const foundLaunch = data.find(l => l.id === launchId);
+          if (foundLaunch) {
+            setSelectedLaunch(foundLaunch);
+          }
+        }
+
         setLoading(false);
       } catch (err) {
         setError('Error de enlace ascendente con el centro de datos.');
@@ -26,11 +37,23 @@ function App() {
     getLaunches();
   }, []);
 
+  // Función para cambiar de pantalla y actualizar la URL al mismo tiempo
+  const handleNavigation = (launch) => {
+    setSelectedLaunch(launch);
+    if (launch) {
+      // Agrega el ID a la URL sin recargar la página
+      window.history.pushState({}, '', `?id=${launch.id}`);
+    } else {
+      // Limpia la URL al volver al inicio
+      window.history.pushState({}, '', window.location.pathname);
+    }
+  };
+
   if (loading) return <div className="loading">SINCRO DE DATOS ORBITALES EN CURSO...</div>;
   if (error) return <div className="error">{error}</div>;
 
   if (selectedLaunch) {
-    return <LaunchDetail launch={selectedLaunch} onBack={() => setSelectedLaunch(null)} />;
+    return <LaunchDetail launch={selectedLaunch} onBack={() => handleNavigation(null)} />;
   }
 
   return (
@@ -44,7 +67,7 @@ function App() {
           <LaunchCard 
             key={launch.id} 
             launch={launch} 
-            onClick={() => setSelectedLaunch(launch)} 
+            onClick={() => handleNavigation(launch)} 
           />
         ))}
       </main>

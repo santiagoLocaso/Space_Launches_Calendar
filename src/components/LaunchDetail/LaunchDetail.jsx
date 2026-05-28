@@ -55,10 +55,15 @@ export function LaunchDetail({ launch, onBack }) {
   }, [launch]);
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
+    const publicUrl = `${window.location.origin}/?id=${launch.id}`;
+    navigator.clipboard.writeText(publicUrl);
     alert("Enlace copiado al portapapeles");
   };
 
+  const publicShareUrl = `${window.location.origin}/?id=${launch.id}`;
+  
+  const whatsappText = `🚀 ¡Mira este lanzamiento: *${launch.name}*!\n\nSigue la cuenta regresiva, la telemetría y los datos de la misión aquí:\n${publicShareUrl}`;
+  const twitterText = `🚀 Sigue el lanzamiento de ${launch.name} en el calendario de misiones.\n\n`;
   return (
     <div className="cdm-container">
       <div className="cdm-back-nav">
@@ -110,6 +115,15 @@ export function LaunchDetail({ launch, onBack }) {
           </div>
         </div>
       </div>
+
+      {webcastUrl && (
+        <div className="cdm-box">
+          <h3>TRANSMISIÓN EN DIRECTO</h3>
+          <a href={webcastUrl} target="_blank" rel="noopener noreferrer" className="cdm-live-btn">
+            <span className="live-dot"></span> VER TRANSMISIÓN OFICIAL
+          </a>
+        </div>
+      )}
 
       <div className="cdm-box">
         <h3>DATOS DE MISIÓN</h3>
@@ -222,24 +236,46 @@ export function LaunchDetail({ launch, onBack }) {
         </div>
       </div>
 
-      {webcastUrl && (
-        <div className="cdm-box">
-          <h3>TRANSMISIÓN EN DIRECTO</h3>
-          <a href={webcastUrl} target="_blank" rel="noopener noreferrer" className="cdm-live-btn">
-            <span className="live-dot"></span> VER TRANSMISIÓN OFICIAL
-          </a>
-        </div>
-      )}
-
       <div className="cdm-box">
         <h3>COMPARTIR MISIÓN</h3>
         <div className="share-buttons">
-          <a href={`https://twitter.com/intent/tweet?text=Mira este lanzamiento: ${launch.name}&url=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="share-btn">𝕏 TWITTER</a>
-          <a href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank" rel="noopener noreferrer" className="share-btn">FACEBOOK</a>
-          <a href={`https://api.whatsapp.com/send?text=Mira este lanzamiento: ${window.location.href}`} target="_blank" rel="noopener noreferrer" className="share-btn">WHATSAPP</a>
+          <a 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(window.location.href)}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="share-btn"
+          >
+            𝕏 TWITTER
+          </a>
+          
+          <a 
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="share-btn"
+          >
+            FACEBOOK
+          </a>
+          
+          <a 
+            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="share-btn"
+          >
+            WHATSAPP
+          </a>
+          
           <button onClick={handleCopyLink} className="share-btn copy-btn">🔗 COPIAR ENLACE</button>
         </div>
       </div>
+            <footer className="main-footer">
+        <p>"Mira otra vez ese punto. Eso es aquí. Ese es nuestro hogar. Eso somos nosotros."</p>
+        <div className="footer-links">
+          <span>&copy; {new Date().getFullYear()} SANTIAGO LOCASO</span>
+          <a href="https://www.linkedin.com/in/santiago-locaso/" target="_blank" rel="noopener noreferrer">CONTACTO</a>
+        </div>
+      </footer>
     </div>
   );
 }

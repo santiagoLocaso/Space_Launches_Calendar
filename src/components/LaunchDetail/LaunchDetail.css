@@ -384,7 +384,7 @@
 }
 
 /* ========================================= */
-/* ANIMACIONES Y MEDIA QUERIES               */
+/* ANIMACIONES                               */
 /* ========================================= */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
@@ -397,35 +397,88 @@
   100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
 }
 
+/* ========================================= */
+/* RESPONSIVE (MÓVILES Y TABLETS)            */
+/* ========================================= */
 @media (max-width: 768px) {
-  .cdm-timer-display {
-    flex-wrap: wrap;
-  }
-  .cdm-time-block {
-    min-width: 60px;
-    padding: 0.5rem;
-  }
-  .cdm-time-num {
-    font-size: 2rem;
-  }
+  /* 1. Ajuste del Hero Banner */
   .cdm-hero {
     padding: 1.5rem;
     height: auto;
     min-height: 300px;
   }
   .cdm-hero-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Letra más chica para que no se corte el nombre */
   }
+  .cdm-hero-meta {
+    gap: 1rem;
+    flex-direction: column; /* Apilamos la fecha, hora y cohete */
+  }
+
+  /* 2. Ajuste del Reloj (Evitamos que se rompa en dos líneas) */
+  .cdm-timer-display {
+    flex-wrap: nowrap; /* Forzamos a que se mantenga en una línea */
+    gap: 0.3rem; /* Juntamos un poco más las cajas */
+  }
+  .cdm-timer-sign {
+    font-size: 2rem; /* T- más chico */
+    margin-right: 0.2rem;
+  }
+  .cdm-time-block {
+    min-width: 50px;
+    padding: 0.5rem;
+  }
+  .cdm-time-num {
+    font-size: 1.6rem; /* Números más chicos */
+  }
+  .cdm-time-label {
+    font-size: 0.65rem;
+  }
+  .cdm-timer-colon {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  /* 3. Ajuste de la Grilla de Datos (Pasa de fila a columna) */
+  .cdm-grid-data {
+    grid-template-columns: 1fr; /* Una sola columna que ocupa el 100% */
+  }
+  .cdm-data-item {
+    flex-direction: column; /* Apilamos el título arriba y el valor abajo */
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .cdm-data-value {
+    text-align: left; /* Alineamos a la izquierda porque ya no hay tabla */
+    max-width: 100%;
+  }
+
+  /* 4. Ajuste del Timeline */
   .spacex-table-head {
-    display: none;
+    display: none; /* Ocultamos la cabecera de la tabla en celulares */
   }
   .spacex-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
   .spacex-time {
     width: auto;
+    color: var(--text-muted); /* Diferenciamos la hora del evento */
+  }
+}
+
+/* Ajuste extra para celulares muy pequeños (ej. iPhone SE) */
+@media (max-width: 400px) {
+  .cdm-time-num {
+    font-size: 1.3rem;
+  }
+  .cdm-timer-sign {
+    font-size: 1.5rem;
+  }
+  .cdm-time-block {
+    min-width: 45px;
+    padding: 0.4rem;
   }
 }
